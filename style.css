@@ -3,6 +3,21 @@
     font-family: monospace;
 }
 
+.game-button {
+    background-color: #d5d5d5;
+    border-style: solid;
+    border-color: #f7f6f4 #a2a2a2 #a2a2a2 #f7f6f4;
+    border-width: 3px;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.game-button:active {
+    background-color: #c1c1c1;
+    border-width: 3.2px 1.6px 1.6px 3.2px;;
+    border-color: #979797;
+}
+
 .game {
     display: flex;
     justify-content: center;
@@ -34,7 +49,6 @@
 
 .game__emoji {
     font-size: 20px;
-    cursor: pointer;
 }
 
 .game__field {
@@ -47,10 +61,15 @@
 .game__cell {
     height: 20px;
     font-size: 14px;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.game__cell:disabled {
+    background-color: #c1c1c1;
+    border-color: #a2a2a2;
+    border-width: 1px;
 }
 
 .notBomb {

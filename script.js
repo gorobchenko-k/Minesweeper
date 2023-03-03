@@ -37,7 +37,7 @@ let selectedBombs;
 
 function initializeGame() {
     field.addEventListener("click", clickFirstTime);
-    field.innerHTML = '<button class="game__cell"></button>'.repeat(cellsCount);
+    field.innerHTML = '<button class="game__cell game-button"></button>'.repeat(cellsCount);
     cells = [...field.children];
     bombCounter.textContent = bombsCount.toString().padStart(3, "0");
     emoji.addEventListener("click", restartGame);
