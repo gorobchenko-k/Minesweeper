@@ -76,14 +76,14 @@ function fieldClickHandlers() {
     field.addEventListener("click", fieldClickHandler);
     field.addEventListener("mousedown", fieldMousedownHandler);
     field.addEventListener("mouseup", fieldMouseupHandler);
-    field.addEventListener("contextmenu", fieldContextmenuHandler);
+    field.addEventListener("contextmenu", fieldContextMenuHandler);
 }
 
 function removeFieldClickHandlers() {
     field.removeEventListener("click", fieldClickHandler);
     field.removeEventListener("mousedown", fieldMousedownHandler);
     field.removeEventListener("mouseup", fieldMouseupHandler);
-    field.removeEventListener("contextmenu", fieldContextmenuHandler);
+    field.removeEventListener("contextmenu", fieldContextMenuHandler);
 }
 
 function fieldClickHandler(e) {
@@ -103,26 +103,26 @@ function fieldMouseupHandler(e) {
     setEmoji(e, emojiCode.emojiBasic);
 }
 
-function fieldContextmenuHandler(e) {
+function fieldContextMenuHandler(e) {
+    if (e.button !== 2) return;
     e.preventDefault();
     const cell = e.target;
     if (cell.classList.contains('game__cell')) {
-        if (cell.innerHTML.codePointAt(0) === emojiCode.emojiFlag) {
-            cell.innerHTML = `&#${emojiCode.emojiQuestionMark};`;
+        if (cell.innerHTML.codePointAt(0) === emojiCode.emojiQuestionMark) {
+            cell.innerHTML = '';
             return;
+        }
+
+        if (cell.innerHTML.codePointAt(0) === emojiCode.emojiFlag) {
+            const cellIndex = cells.indexOf(cell);
+            selectedBombs.splice(selectedBombs.indexOf(cellIndex), 1);
+            cell.innerHTML = `&#${emojiCode.emojiQuestionMark};`;
         }
 
         if (cell.innerHTML === '' && selectedBombs.length < bombsCount) {
             const cellIndex = cells.indexOf(cell);
             selectedBombs.push(cellIndex);
             cell.innerHTML = `&#${emojiCode.emojiFlag};`;
-
-        }
-
-        if (cell.innerHTML.codePointAt(0) === emojiCode.emojiQuestionMark) {
-            const cellIndex = cells.indexOf(cell);
-            selectedBombs.splice(selectedBombs.indexOf(cellIndex), 1);
-            cell.innerHTML = '';
         }
 
         bombCounter.innerHTML = (bombsCount - selectedBombs.length).toString().padStart(3, "0");
