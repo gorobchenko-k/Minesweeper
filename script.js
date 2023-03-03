@@ -54,8 +54,7 @@ function clickFirstTime(e) {
 }
 
 function restartGame() {
-    clearTimeout(timerID);
-    removeFieldClickHandlers();
+    stopGame();
     initializeGame();
 }
 
@@ -137,7 +136,7 @@ function setEmoji(e, emojiCode) {
 }
 
 function setBombs(cellIndex) {
-    bombs = [...Array(cellsCount).keys()].sort(() => Math.random() - 0.5)
+    bombs = [...Array(cellsCount).keys()].sort(() => Math.random() - 0.5);
     bombs.splice(bombs.indexOf(cellIndex), 1);
     bombs = bombs.slice(0, bombsCount);
 }
@@ -154,17 +153,18 @@ function openCell(row, column) {
 
     closedCellsCount--;
 
-    if (isWin()) return;
+    if (isWin(cellIndex)) return;
 
     if (isLoss(cellIndex)) return;
 
     showCountBombsAroundCell(cellIndex);
 }
 
-function isWin() {
+function isWin(cellIndex) {
     if (closedCellsCount <= bombsCount) {
-        clearTimeout(timerID);
+        showCountBombsAroundCell(cellIndex);
         emoji.innerHTML = `&#${emojiCode.emojiWinner};`;
+        stopGame();
         return true;
     }
 }
@@ -175,9 +175,9 @@ function isLoss(cellIndex) {
     if (isBomb(row, column)) {
         cell.innerHTML = `&#${emojiCode.emojiBomb};`;
         cell.style.background = 'red';
-        clearTimeout(timerID);
         emoji.innerHTML = `&#${emojiCode.emojiLoser};`;
         showMapBombs();
+        stopGame();
         return true;
     }
 }
@@ -237,6 +237,11 @@ function getRowAndColumn(cellIndex) {
     const row = Math.floor(cellIndex / width);
     const column = cellIndex % width;
     return [row, column];
+}
+
+function stopGame() {
+    clearTimeout(timerID);
+    removeFieldClickHandlers();
 }
 
 initializeGame();
