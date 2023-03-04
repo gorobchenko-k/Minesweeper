@@ -3,7 +3,7 @@
 
 **[Ссылка на проект](https://gorobchenko-k.github.io/Minesweeper/)**
 
-<img src="https://user-images.githubusercontent.com/115789797/222183467-fe7862d7-6eb1-4981-aff0-e9e8f9bbb334.gif" width="300"/>
+<img src="https://user-images.githubusercontent.com/115789797/222921971-025007d4-e9e2-49e8-8680-614842bdafb0.gif" width="300"/>
 
 Для создания использовались:
 <div>
